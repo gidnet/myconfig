@@ -1,0 +1,8 @@
+#!/bin/bash
+
+IP=$(curl -s 'http://checkip.dyndns.org' | sed 's/.*Current IP Address: \([0-9\.]*\).*/\1/g')
+
+case $BLOCK_BUTTON in
+    3) echo "$IP" | xclip ;;
+    *) echo "$IP" ;;
+esac
