@@ -1,0 +1,45 @@
+1. Apagar 
+rm ~/.config/pulse/*.*
+2. Chamar o pulse audio
+start-pulseaudio-x11
+
+pgrep pulseaudio
+
+Eu fiz isso principalmente porque eu tinha a sensação de
+que talvez várias instâncias do pulseaudio estavam correndo
+(e interferindo uns com os outros ?).
+
+sempre voltava 4 a 5 pids, agora há apenas um pid voltou novamente.
+
+3. Adcionar
+load-module module-switch-on-connect
+
+para /etc/pulse/default.pa (mesmo tendo tenho certeza que isso não tem 
+nada a ver com este problema) .
+
+4 desemparear e reparear o dispositivo 
+(esta é realmente a única coisa específica bluetooth feita, 
+o resto foi por conta do pulseaudio. - O que poderia 
+levar à conclusão de que pulseaudio é o problema real).
+
+5. Reiniciar o pulseaudio:
+pulseaudio -k; pulseaudio --start
+
+6. Saídas:
+rfkill list
+inxi -F
+pactl list sinks
+
+7. instalar:
+sudo pacman -S pavucontrol
+
+8. Erros do tipo:Connection refused (111)
+editar etc/bluetooth/main.conf e acrecentar:
+Enable=Source,Sink,Headset,Gateway,Control,Socket,Media
+
+9. Outras soluções:
+# sudo systemctl stop bluetooth.service
+# rm -rf ~/.config/pulse
+# sudo hciconfig -a hci0 reset
+# sudo systemctl start bluetooth.service
+
