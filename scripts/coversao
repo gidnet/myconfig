@@ -1,0 +1,8 @@
+#! /bin/bash
+echo -n "informe as tres primeiras letras do arquivo a converter."
+read arquivo
+echo
+echo -n "informe agora o nome que quer dar a musica"
+read nome
+cd ~/.mozilla/firefox/*defa*/Cache
+ffmpeg -i $arquivo* -acodec libmp3lame -ab 160k -ac 2 -ar 44100     $nome.mp3

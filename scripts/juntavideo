@@ -1,0 +1,96 @@
+#!/bin/bash
+
+TMPFILE=/tmp/tmp123456.avi
+
+help()
+{
+  echo "joinavi: Concatena um conjunto de vídeos avi em um único arquivo."
+  echo ""
+  echo "Uso: joinavi -<Command> -o <file>" 
+  echo ""
+  echo "<Command>"
+  echo "  a         Concatena todos os arquivos do corrente diretório no arquivo de"
+  echo "            saída."
+  echo "  i <list>  Especifica a lista de arquivos (separados por espaço) que serão"
+  echo "            concatenados."       
+  echo "  o <file>  Especifica o nome do arquivo de saída."
+  echo ""
+  echo "Autor: AlexBR <josealexandre @ msn.com>"
+  echo ""
+}
+
+GetParam()
+{
+PARAM=""
+while [ "$1" != "" ]; do
+    case "$1" in
+        -a | --input )          return
+				;;
+	-i | --input )          return
+                                ;;
+        -o | --output )    	return
+                                ;;
+        -h | --help )           return
+                                ;;				
+        * )                     TEMP=$(echo "$1" | sed "s/ /*/g")
+				PARAM=$PARAM" "$TEMP
+				shift
+    esac
+done
+}
+
+############################################
+## Recebe os argumentos de entrada
+############################################
+while [ "$1" != "" ]; do
+    case "$1" in
+        -a | --all )		shift
+				INPUTS=$(ls *.avi | sed "s/ /*/g")
+				;;
+        -i | --input )          shift
+				GetParam "$@"
+				INPUTS=$PARAM
+                                ;;
+        -o | --output )    	shift
+				OUTPUT=$1
+				#GetParam "$@"
+				#OUTPUT=$(echo "$PARAM" | sed "s/\*/ /g")				
+                                ;;
+        -h | --help )           help
+				exit 0
+                                ;;				
+        * )                     shift
+    esac
+done
+############################################
+
+if [ -e $TMPFILE ];
+then
+	rm -rf $TMPFILE
+fi
+
+# Falha nos argumentos de entrada
+if [ "$INPUTS" = "" ] || [ "$OUTPUT" = "" ]
+then
+	help
+	exit 0
+fi
+
+################################################
+## Junta os vídeos
+################################################
+for file in $INPUTS; do
+  TEMP=$(echo "$file" | sed "s/\*/ /g")
+  echo -n "Concatenando arquivo "$TEMP"... "
+  cat "$TEMP" >> "$TMPFILE"
+  echo "Feito!"
+done
+
+echo -n "Reindexando o arquivo final... "
+mencoder -forceidx -oac copy -ovc copy $TMPFILE  -o "$OUTPUT"
+################################################
+
+echo "Todo feito!"
+
+# Apaga arquivo de trabalho
+rm -rf $TMPFILE

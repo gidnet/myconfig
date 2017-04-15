@@ -1,0 +1,131 @@
+#!/bin/sh
+############################################
+# Criação de album de fotografias.
+# Criado por:
+# Eduardo Vieira Mendes
+# eduardovmendes@gmail.com
+# LUS: 298813
+############################################
+ 
+# Modifique o número de fotos por linha
+n2=5
+ 
+# Modifique o tamanho dos thumbnails (miniaturas) em pixels
+thumb=100
+ 
+# Função para criação dos frames
+index() {
+echo "<frameset rows='35%,65%'>
+<frame src='cima.htm' name='cima' frameborder='0' marginwidth='2' marginheight='2'>
+<frame src='foto.htm' name='foto' marginwidth='10' marginheight='10'>
+</frameset>" >> index.htm
+}
+ 
+# Função apra criação do header da lista de fotos
+header() {
+echo "<html><head><title>$titulo</title></head><body>
+<font size=4><div align='center'>Album de fotos - $titulo</div></font>"
+}
+ 
+# Função para finalizar a lista de fotos
+fim() {
+echo "</body></html>"
+}
+ 
+# Função para iniciar a tebala de lista de fotos
+tabelaini() {
+echo "<table border='1' bordercolor='#000000' cellpadding='0' cellspacing='2' align='center'><tr>"
+ 
+}
+ 
+# Função para finalizar a tebala de lista de fotos
+tabelafim() {
+echo "</tr></table>"
+}
+ 
+# Função que cria as páginas
+criar() {
+ 
+# Remove os arquivos
+rm index.htm cima.htm foto.htm 2> /dev/null
+ 
+echo "Qual o nome do Album?"
+ 
+read titulo
+ 
+titulo=$titulo
+ 
+header >> cima.htm
+tabelaini >> cima.htm
+ 
+total=0
+n1=0
+ 
+for i in *.jpg ; do
+  ((total=total+1))
+done
+ 
+echo "<br><b>Total de fotos no albúm: $total</b><br>" >> foto.htm
+ 
+for i in *.jpg ; do
+y=`echo $i`
+  if [ $n1 -eq $n2 ] ; then
+    echo "<tr>" >> cima.htm
+    ((n2=n2+5))
+  fi
+ 
+  echo "<td align=center><a href='$y' target='foto'><img src='$y' border='0' width=$thumb></a></td>" >> cima.htm
+  echo "$y <br>" >> foto.htm
+ 
+  if [ $n1 -eq $n2 ] ; then
+    echo "</tr>" >> cima.htm
+    ((n2=n2+5))
+  fi
+   
+  ((n1=n1+1))
+ 
+done
+ 
+for i in *.png ; do
+y=`echo $i`
+  if [ $n1 -eq $n2 ] ; then
+    echo "<tr>" >> cima.htm
+    ((n2=n2+5))
+  fi
+ 
+  echo "<td align=center><a href='$y' target='foto'><img src='$y' border='0' width=$thumb></a></td>" >> cima.htm
+  echo "$y <br>" >> foto.htm
+ 
+  if [ $n1 -eq $n2 ] ; then
+    echo "</tr>" >> cima.htm
+    ((n2=n2+5))
+  fi
+   
+  ((n1=n1+1))
+ 
+done
+ 
+for i in *.bmp ; do
+y=`echo $i`
+  if [ $n1 -eq $n2 ] ; then
+    echo "<tr>" >> cima.htm
+    ((n2=n2+5))
+  fi
+ 
+  echo "<td align=center><a href='$y' target='foto'><img src='$y' border='0' width=$thumb></a></td>" >> cima.htm
+  echo "$y <br>" >> foto.htm
+ 
+  if [ $n1 -eq $n2 ] ; then
+    echo "</tr>" >> cima.htm
+    ((n2=n2+5))
+  fi
+   
+  ((n1=n1+1))
+ 
+done
+tabelafim >> cima.htm
+fim >> cima.htm
+index
+}
+ 
+criar

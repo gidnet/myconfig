@@ -1,0 +1,56 @@
+#!/bin/bash
+
+# Definição da faixa de valores para a geração
+# dos números aleatórios. Esta faixa de valores
+# vai de 1 até 60
+
+firstnum=1
+lastnum=60
+
+var0=0
+cartoes=10
+
+# Todo script CGI precisa começar com uma linha
+# indicando o tipo de arquivo, em nosso caso,
+# html A diretiva echo vazia é usada apenas para
+# criar uma linha em branco, também obrigatória
+# O cabeçalho montado é bastante simples, mas
+# poderiamos aqui montar qualquer tipo de cabeçalho
+# html que desejarmos
+
+echo "Content-type:text/html";
+echo
+
+echo "<HTML><BODY><TITLE>Loteca</TITLE>";
+
+# Montamos aqui a tabela, que irá conter os números gerados
+
+echo "<TABLE ALIGN=CENTER>";
+
+# Temos aqui dois laços, um que controla o número
+# de cartões  a serem gerados, controlado pela
+# variável var0, cujo valor se inicia em 0 e vai
+# sendo aumentado em uma unidade a cada execução do
+# laço. A montagem do cartão em si é controlada
+# pelo segundo laço, através da variação das
+# variáveis i e j
+
+while [ "$var0" -lt "$cartoes" ]
+ do
+    echo "<TR>"
+    i=0
+    j=6
+     while [ "$i" -lt "$j" ]
+      do
+       Random=`perl -e "print int(rand($lastnum+1))+$firstnum;"`
+       echo -n "<TD ALIGN=RIGHT>$Random</TD>"
+       i=`expr $i + 1`
+      done
+    echo
+    var0=`expr $var0 + 1`
+    echo "</TR>"
+ done
+
+echo "</TR>"
+echo "</TABLE>"
+echo "</HTML></BODY>"
