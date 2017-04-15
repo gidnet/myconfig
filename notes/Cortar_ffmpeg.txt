@@ -1,0 +1,8 @@
+Se quero cortar os últimos 45 segundos:
+
+    ffmpeg -i video.mp4 -t 00:02:15 -acodec copy -vcodec copy video_editado.mp4
+
+
+Se quero remover os primeiros 10 segundos e extrair os dois minutos seguintes:
+
+    ffmpeg -i video.mp4 -ss 00:00:10 -acodec copy -vcodec copy video_editado.mp4

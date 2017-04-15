@@ -1,0 +1,17 @@
+systemctl start docker.service (iniciar serviço)
+
+docker images (listar imagens)
+
+docker run -t -i nginx-gidalte-custom /bin/bash (iniciar dentro do conteiner)
+
+ctrl+p+q (sair sem fechar)
+
+docker ps (listar ID)
+
+docker attach <ID do Container> (voltar ao conteiner)
+
+docker commit <ID do Container> nginx-gidalte-custom /bin/bash (salvar alterações)
+
+docker run -p 80:80 -d nginx-gidalte-custom (rodar externamente)
+
+docker build -t nginx-gidalte-custom (excutar Dockerfile)

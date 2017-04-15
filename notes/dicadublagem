@@ -1,0 +1,37 @@
+Remove uma trilha de audio de um arquivo dual-audio AVI/MKV:
+
+Usar mkvtoolnix -- Matroska tools for Linux/Unix and Windows se você está lidando com arquivos mkv
+
+Ele faz com Matroska o que os OGMtools faz para o formato OGM e outros.
+
+MKVToolnix é um conjunto de ferramentas de código aberto para Windows, Linux e outras plataformas UNIX. Com a ajuda destas ferramentas, você pode inspecionar, alterar, unir e dividir o conteúdo de arquivos de vídeo Matroska (MKV).Matroska inovou com a criação deste novo formato de arquivo (MKV) para multimídia, visando assumir a liderança dos formatos contêiner multimídia do futuro. Usando MKVToolnix, um dos utilitários de vídeo especializados, você também pode extrair faixas/dados e criar arquivos Matroska (MKV) a partir de outros arquivos multimídia. A tecnologia subjacente de MKV é a Metalinguagem Binária Extensível (EBML), uma espécie de XML Binário.MKVToolnix contém mkvmerge para a criação de arquivos MKV a partir de outros formatos, mkvinfo para obter informações sobre as faixas existentes em um arquivo MKV, mkvextract para extrair faixas de arquivos MKV e para salvá-las em outros formatos e base64tool para codificar e decodificar base64.
+
+http://www.bunkus.org/videotools/mkvtoolnix/
+
+Usar AVIMux GUI 1.17.8.3 - VideoHelp.com Downloads para arquivos avi
+
+AVI-Mux GUI é uma aplicação que permite combinar vários arquivos de vídeo, áudio ou legendas em um arquivo, com sem restrição de tamanho, o que permite configurar as propriedades do arquivo de saída para um nível mais profundo do que o habitual para tais aplicações. Tipos de entrada suportados de arquivo: * AVI, MKV * WAV, MPA/MP3, AC3, DTS, AAC, OGG / Vorbis * SRT, SSA. Formatos de saída suportados: * AVI, MKV * prima (MPx, AC3, DTS ...) * ATDS-AAC, OGG / Vorbis.
+
+http://www.videohelp.com/tools/AVIMux-GUI
+
+Usar tsMuxeR 1.10.6 - VideoHelp.com Downloads para arquivos m2ts
+
+smartLabs tsMuxer é um muxer Transport Stream. Remux / mux fluxos elementares, EVO / VOB / MPG, MKV / MKA, MP4/MOV, TS, M2TS para TS para M2TS. Codecs de vídeo H.264, VC-1, MPEG2. Codecs de áudio AAC, AC3 / E-AC3 (DD +), DTS / DTS-HD. Capacidade de definir fps muxing manualmente e automaticamente, Capacidade de mudar o nível para fluxos H.264, capacidade de mudar algumas faixas de som, capacidade de extrair DTS núcleo de DTS-HD, capacidade de juntar arquivos. Saída / Autor para compatível Blu-ray Disc ou AVCHD
+
+http://www.videohelp.com/tools/tsMuxeR
+
+Usar MP4Box 0.4.6 rev2735 para arquivos mp4
+
+MP4Box é um multiplexador MP4. Pode importar vídeo MPEG-4, DivX, XviD, etc, 3ivx h264, fluxos de áudio e legendas dentro do recipiente. Mp4. O resultado final é um fluxo compatível com MP4. Ele também pode extrair streams de um mp4.. MP4Box é uma ferramenta de linha de comando, mas pode ser usado com interfaces gráficas, como Yamb ou MP4Box minha GUI.
+
+http://www.videohelp.com/tools/mp4box
+
+Todos os acima são muxers e demuxers, então você não terá que re-codificar nada, mas apenas demux e mux.
+
+fonte: http://www.techenclave.com/applications/remove-audio-stream-dual-audio-110259/
+
+Outra maneira, usando Avidemux:
+Abra o arquivo.
+O menu de áudio: selecione a opção "main track" (o único a manter)
+Também pode ser uma boa idéia "Build VBR time map", mantém em sincronia.
+Então, com as caixas de formato esquerda para "Vídeo" e conjunto "Audio" para "Copy" (padrão), fazer "Arquivo / salvar / salvar vídeo".

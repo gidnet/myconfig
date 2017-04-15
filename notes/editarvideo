@@ -1,0 +1,69 @@
+Melhora imagem com filtro
+
+mplayer -vf spp,hqdn3d,pp=de video.mpeg
+
+Juntar videos
+
+MP4Box -add file1.mp4 -add file2.mp4 output.mp4
+
+Cortar avi em segundos
+
+mencoder -ss <start> -endpos <end> -oac copy -ovc copy inputfile.avi -o outputfile.avi
+
+Converter wmv para avi:
+
+mencoder inputfile.wmv -ofps 30 -ovc lavc -oac copy -o outfile.avi
+
+Converter e produzir screencast:
+
+mencoder -of avi -ovc lavc movie.avi -o movie2.avi; ffmpeg -i movie2.avi -r 12  -b 100 movie.flv
+
+Converter flv em avi:
+
+mencoder your_video.flv -oac mp3lame -ovc xvid -lameopts preset=standard:fast -xvidencopts pass=1 -o your_video.avi
+
+mencoder input.flv -ovc lavc -oac mp3lame -o output.avi
+
+Concatenar videos:
+
+mencoder -forceidx -ovc copy -oac copy -o output.avi video1.avi video2.avi
+
+mencoder -forceidx -of lavf -oac copy -ovc copy -o output.flv clip1.flv clip2.flv clip3.flv
+
+Comprimindo varias figuras em png ou jpg em um video:
+
+mencoder "mf://*.png" -mf fps=2 -o output.avi -ovc lavc -lavcopts vcodec=mpeg4
+
+mencoder "mf://*.jpg" -mf fps=8 -o ./video.avi -ovc lavc
+
+mencoder "mf://frame_*.bmp" -mf w=720:h=480:fps=30:type=bmp -ovc lavc -lavcopts vcodec=mpeg4 -o number_video.mp4
+
+mencoder mf://image1.jpg,image2.jpg,image3.jpg -mf w=800:h=600:fps=25:type=jpeg -ovc copy -oac copy -o output.avi
+
+Extrair audio de avi:
+
+mencoder "${file}" -of rawaudio -oac mp3lame -ovc copy -o audio/"${file/%avi/mp3}"
+
+Incluir som:
+
+mencoder -idx Your_Input_Video_File -ovc lavc -oac mp3lame -audiofile  Your_Audio_track.mp3  -o  Output_File.avi
+
+mencoder input.flv -ovc lavc -oac mp3lame -o output.avi
+
+Removendo o som:
+
+mencoder -ovc copy -nosound ./movie.mov -o ./movie_mute.mov
+
+Extrair dublagem:
+
+mencoder -aid 2 -oac copy file.avi -o english.mp3
+
+Incluindo subtitulos:
+
+mencoder -sub subs.ssa -utf8 -subfont-text-scale 4 -oac mp3lame -lameopts cbr=128 -ovc lavc -lavcopts vcodec=mpeg4 -ffourcc xvid -o output.avi input.flv
+
+Incluir legenda cabeçalho marca dágua:
+
+mencoder -sub heading.ssa -subpos 0 -subfont-text-scale 4 -utf8 -oac mp3lame -lameopts cbr=128 -ovc lavc -lavcopts vcodec=mjpeg -vf scale=320:-2,expand=:240:::1 -o output.avi input.flv
+
+

@@ -1,0 +1,6 @@
+loadkeys
+
+br-abnt2.map.gz
+br-abnt.map.gz
+br-latin1-abnt2.map.gz
+br-latin1-us.map.gz

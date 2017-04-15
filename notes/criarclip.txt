@@ -1,0 +1,10 @@
+
+Renomear
+x=1; for i in *jpg; do counter=$(printf %03d $x); ln "$i" renomeado/img"$counter".jpg; x=$(($x+1)); done
+
+ffmpeg -r 4 -f image2 -i img%03d.jpg -r 25 saida/depurando-imagenes-negocio.mpg
+
+--------------------------------------------------------------------------------
+Redimencionar
+mogrify -resize 800x420! img*.jpg
+ffmpeg -framerate 1/6 -i img%03d.jpg -s 640x480  -c:v libx264 -r 30 -pix_fmt yuv420p saida/poli3a.mp4

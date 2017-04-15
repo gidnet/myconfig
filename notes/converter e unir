@@ -1,0 +1,67 @@
+Dê uma trilha sonora para uma série de imagens para criar um flv
+Cria um arquivo FLV 5 minutos, com a dada sequência de imagens e áudio com 0,5 fps.
+
+As imagens foram criadas usando o seguinte comando:
+
+for x in `seq 0 300», do cp .. / head.PNG cabeça `printf '% 03D' $ x 'png;. feito
+
+Você também pode inserir os metadados para buscar mais fácil yamdi usando da seguinte forma:
+
+yamdi-i video.flv o muxed.flv-
+
+ffmpeg -t 300 -r '0.5' -i head-%03d.png -i ../TvQuran.com__144.mp3 -acodec copy muxed.flv
+
+
+$ffmpeg -i file1.flv file1.avi
+$ffmpeg -i file.wmv -ab 56 -ar 22050 -b 500 -r 15 -s 320x240 file.flv
+$ffmpeg -i file.wmv -acodec mp3 -ab 32 -ac 1 -ar 44100 file.flv
+====================
+Converter wmv em avi
+
+$ ffmpeg -sameq -i <infile>.wmv <outfile>.avi
+===============================
+Usando o avimerge paea unir AVI
+
+$avimerge -o video-concatenado.avi -i video-parte1.avi video-parte2.avi
+=======================================================================
+Você converte os vídeos para o formato MPEG com os mesmos bit rates, codecs, resoluções, números de quadros:
+
+$ffmpeg -i arquivo_original -s vga -target ntsc-dvd -aspect 4:3 arquivo_novo.mpg
+
+Ou, para fazer em todos os arquivos do diretório de uma vez:
+
+$for i in *; do ffmpeg -i “$i” -s vga -target ntsc-dvd -aspect 4:3 “$i.mpg”;done
+================================================================================
+Depois você concatena todos os arquivos mpeg e joga a saída para um arquivo mpeg novo:
+
+$cat *.mpg > teste.mpg
+
+ou
+
+$cat file1.mpg file2.mpg > file3.mpg
+====================================
+O arquivo gerado fica com o índice bagunçado para corrigir, basta passar o arquivo pelo ffmpeg novamente:
+
+$ffmpeg -i teste.mpg -sameq arquivo_final.mpg
+ou
+$mencoder -forceidx -oac copy -ovc copy corruptvideo.avi -o fixedvideo.avi
+==========================
+Conversão de RMVB para AVI
+
+mencoder FILE.rmvb -oac mp3lame -lameopts br=192 -ovc lavc -lavcopts vcodec=mpeg4:vhq -o NEWFILE.avi*
+=========================
+Conversão de WMV para AVI
+
+mencoder FILE.wmv -ofps 23.976 -ovc lavc -oac copy -o NEWFILE.avi*
+=========================
+Conversão de MOV para AVI
+
+mencoder -ovc lavc -lavcopts vcodec=mpeg4 -oac mp3lame -lameopts vbr=3 FILE.mov -o NEWFILE.avi -v*
+=========================
+Conversão de FLV para MPG
+
+ffmpeg -i FILE.flv -r 60 -ab 56 -ar 22050 -b 500 -s 320x240 NEWFILE.mpg*
+=========================
+Conversão de MPG para AVI
+
+mencoder FILE.mpg -ovc xvid -oac mp3lame -xvidencopts bitrate=800 -o NEWFILE.avi*
