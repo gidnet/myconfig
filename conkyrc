@@ -1,0 +1,77 @@
+### Conky ###
+# Use Xft?
+use_xft yes
+xftfont monospace:size=9
+xftalpha 1
+update_interval 1
+total_run_times 0
+background yes
+own_window yes
+own_window_transparent yes
+own_window_type override
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+own_window_colour black
+double_buffer yes
+minimum_size 1 1
+maximum_width 280
+draw_shades no
+draw_outline no
+draw_borders no
+draw_graph_borders no
+default_color gray
+default_shade_color 000000
+default_outline_color d9d7d6
+alignment top_right
+gap_x 10
+gap_y 50
+no_buffers yes
+uppercase no
+cpu_avg_samples 2
+net_avg_samples 2
+override_utf8_locale yes
+color1 red
+color2 gray
+color3 yellow
+use_spacer none
+
+TEXT
+
+${voffset -18}${goto 30}${font Arial Black:size=20}${alignc}${color1}${time %H}${color1}${voffset 0}${time :%M}${time :%S}${color}${font}
+${voffset 0}${goto 78}${font Liberation Sans:style=Bold:size=14}${alignc}${color3}${time %A}${color}${font}
+${goto 78}${alignc}${time %d %b %Y}
+${voffset 0}${font OpenLogos:size=16}J${font} Kernel: ${alignr}${kernel}
+${font StyleBats:size=16}q${font} Uptime:$alignr$uptime
+${font StyleBats:size=16}A${font} CPU:$alignr${cpu cpu0}%
+${font StyleBats:size=16}g${font} RAM:$alignr$mem/$memmax
+${font StyleBats:size=16}j${font} Swap:$alignr$swap/$swapmax
+${voffset 4}${font Pie charts for maps:size=14}7${font} ${voffset -5}Root:
+${voffset 4}${fs_used /}/${fs_size /} ${alignr}${fs_bar 6,60 /}
+${font Pie charts for maps:size=14}7${font}${voffset -5}Home:
+${voffset 4}${fs_free /home}/${fs_size /home} ${alignr}${fs_bar 6,60 /home}
+
+${voffset -6}${font PizzaDude Bullets:size=14}O${font} Up: ${upspeed wlp1s0} kb/s ${alignr}${upspeedgraph wlp1s0 8,60 F57900 FCAF3E}
+${voffset 4}${font PizzaDude Bullets:size=14}U${font} Down: ${downspeed wlp1s0} kb/s ${alignr}${downspeedgraph wlp1s0 8,60 F57900 FCAF3E}
+${voffset 4}${font PizzaDude Bullets:size=14}N${font} Upload: ${alignr}${totalup wlp1s0}
+${voffset 4}${font PizzaDude Bullets:size=14}T${font} Download: ${alignr}${totaldown wlp1s0}
+${voffset 4}${font PizzaDude Bullets:size=14}a${font} Ip Local: ${alignr}${addr wlp1s0}
+${voffset 4}${font PizzaDude Bullets:size=14}a${font} Ip Público: ${alignr}${texeci 20 curl -s ipinfo.io/ip}
+${voffset 4}${font PizzaDude Bullets:size=14}u${font} Update: ${execpi 3600 checkupdates | wc -l}
+# ${voffset 4}${font PizzaDude Bullets:size=14}e${font} Email: ${execpi 300 python ~/.scripts/gmail.py}
+# ${voffset 4}${font PizzaDude Bullets:size=14}t${font} Tempo: ${execi 300 /home/buttons/bin/weather.sh 08534}
+${voffset 20}${goto 30}TOP THREE CPU${alignr}
+${voffset 5}${goto 30}$color2${top name 1}$alignr${top cpu 1}%
+${goto 30}$color2${top name 2}$alignr${top cpu 2}%
+${goto 30}$color2${top name 3}$alignr${top cpu 3}%
+${goto 30}${hr 1}
+${voffset 10}${goto 30}TOP THREE RAM${alignr}
+${voffset 5}${goto 30}$color2${top_mem name 1}$alignr${top_mem mem_res 1}
+${goto 30}$color2${top_mem name 2}$alignr${top_mem mem_res 2}
+${goto 30}$color2${top_mem name 3}$alignr${top_mem mem_res 3}
+${goto 30}${hr 1}
+${voffset -7}${if_existing /proc/net/route wlp1s0}
+${goto 30}CONEC${alignr}wiriless
+${goto 30}SNAL${alignr}${wireless_link_qual wlp1s0}%
+${goto 30}VELOC${alignr}${downspeedf wlp1s0}KiB D I ${alignr}${upspeedf wlp1s0}KiB U
+${else}
+${voffset 10}$alignr${execi 1200 whoami}@${nodename}
+
